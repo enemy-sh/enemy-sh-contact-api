@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/contact
+Content-Type: application/json
+
+{
+    "name": "Eric",
+    "email": { "primaryEmail": "eric@example.com", "additionalEmails": [] },
+    "message": "Hello World",
+    "activated": false
+}
