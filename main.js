@@ -1,15 +1,29 @@
+import rateLimit from 'express-rate-limit';
+import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import express from 'express';
-import dotenv from 'dotenv';
 import { env } from 'process';
-import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
+const contactRateLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, 
+    max: 5, 
+    message: {
+        status: 429,
+        message: 'Too many submissions, please try again after an hour.',
+    },
+    standardHeaders: true, 
+    legacyHeaders: false,
+});
+
 const app = express();
-const uri = env.URI
+const uri = env.URI;
 const port = env.PORT || 4888;
 const apiKey = env.API_KEY;
+const origin = env.ORIGIN;
 
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];
@@ -27,13 +41,18 @@ const verifyToken = (req, res, next) => {
     }
 }
 
+app.use(cors({
+    origin: origin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}))
+
 app.use(express.json());
-app.post('/api/contact/', verifyToken, async (req, res) => {
+app.post('/api/contact/', contactRateLimiter,verifyToken, async (req, res) => {
     const {
         name,
         email,
         message,
-        email: { primaryEmail, additonalEmails }
     } = req.body;
 
     const options = {
@@ -47,7 +66,7 @@ app.post('/api/contact/', verifyToken, async (req, res) => {
             name: name,
             activated: false,
             position: 0,
-            email: email,
+            email: { primaryEmail: email, additionalEmails: [] },
             message: message,
             createdBy: { source: "API" } 
         }
@@ -56,15 +75,13 @@ app.post('/api/contact/', verifyToken, async (req, res) => {
         const response = await fetch(`${uri}/contacts`, {...options, body: JSON.stringify(options.body)});
         const data = await response.json();
         console.log(data);
-        res.status(200).json(data);
+        res.status(200).json({ message: "Submitted successfully"});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error"});
     }
 });
 
-
-
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`server is running on port ${port}`);
 });

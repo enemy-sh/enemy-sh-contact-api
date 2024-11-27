@@ -3,7 +3,6 @@ Content-Type: application/json
 
 {
     "name": "Eric",
-    "email": { "primaryEmail": "eric@example.com", "additionalEmails": [] },
+    "email": "eric@example.com",
     "message": "Hello World",
-    "activated": false
 }
