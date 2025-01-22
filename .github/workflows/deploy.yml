@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  call-enemy-sh-cd-workflow:
+  call_enemy_sh_cd_workflow:
+    name: Call Enemy.sh CD Workflow
     uses: enemy-sh/devops/.github/workflows/enemy-sh-cd.yml@main
     with:
       container-app-environment-id: ${{ vars.CONTAINER_APP_ENVIRONMENT_ID }}

@@ -43,12 +43,12 @@ variable "registry_username" {
 // variables not driven by pipeline
 variable "cpu" {
   type        = string
-  description = "CPU limit"
+  description = "CPU request"
 }
 
 variable "memory" {
   type        = string
-  description = "Memory limit"
+  description = "Memory request"
 }
 
 variable "max_replicas" {
