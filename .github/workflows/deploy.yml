@@ -5,22 +5,15 @@ on:
     branches:
       - main
 
-env:
-  CR_PAT: ${{ secrets.CR_PAT }}
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: docker/setup-docker-action@v4
-
-      - name: build & push
-        run: |
-          echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
-          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
-
-
-
+  call-enemy-sh-cd-workflow:
+    uses: enemy-sh/.github/workflows/enemy-sh-cd.yml@main
+    with:
+      container-app-environment-id: ${{ vars.CONTAINER_APP_ENVIRONMENT_ID }}
+      resource-group-name: ${{ vars.ESH_RESOURCE_GROUP_NAME }}
+      subscription-id: ${{ vars.ESH_SUBSCRIPTION_ID }}
+      client-id: ${{ vars.ESH_CLIENT_ID }}
+    secrets:
+      github-token: ${{ secrets.CR_PAT }}
+      client-secret: ${{ secrets.ESH_CLIENT_SECRET }}
+      tenant-id: ${{ secrets.ESH_TENANT_ID }}
