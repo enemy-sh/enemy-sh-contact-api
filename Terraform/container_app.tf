@@ -9,6 +9,16 @@ resource "azurerm_container_app" "container_app" {
     value = var.github_token
   }
 
+  ingress {
+    traffic_weight {
+      percentage = 100
+    }
+    
+    transport = "tcp"
+    exposed_port = 5000
+    target_port = var.port
+  }
+
   template {
     max_replicas = var.max_replicas
     min_replicas = var.min_replicas
