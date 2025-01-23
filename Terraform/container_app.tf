@@ -14,9 +14,7 @@ resource "azurerm_container_app" "container_app" {
       latest_revision = true
       percentage = 100
     }
-
-    transport = "tcp"
-    exposed_port = 5000
+    
     target_port = var.port
   }
 
