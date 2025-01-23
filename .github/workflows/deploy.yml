@@ -19,3 +19,4 @@ jobs:
       github-token: ${{ secrets.CR_PAT }}
       client-secret: ${{ secrets.ESH_CLIENT_SECRET }}
       tenant-id: ${{ secrets.ESH_TENANT_ID }}
+      auth-secret: ${{ secrets.ESH_AUTH_SECRET }}

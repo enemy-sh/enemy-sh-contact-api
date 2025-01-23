@@ -40,6 +40,12 @@ variable "registry_username" {
   sensitive   = true
 }
 
+variable "auth_secret" {
+  type        = string
+  description = "The auth secret"
+  sensitive   = true
+}
+
 // variables not driven by pipeline
 variable "cpu" {
   type        = string
@@ -69,4 +75,9 @@ variable "registry_server" {
 variable "port" {
   type        = number
   description = "The port number of the container"
+}
+
+variable "origin" {
+  type        = string
+  description = "The host name of the origin"
 }
