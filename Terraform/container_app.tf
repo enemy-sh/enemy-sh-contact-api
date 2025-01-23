@@ -14,6 +14,10 @@ resource "azurerm_container_app" "container_app" {
     min_replicas = var.min_replicas
 
     container {
+      env {
+        name = "PORT"
+        value = var.port
+      }
       name   = "${local.container_app_name}-cont"
       image  = local.container_app_image
       memory = var.memory

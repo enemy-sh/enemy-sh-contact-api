@@ -65,3 +65,8 @@ variable "registry_server" {
   type        = string
   description = "The registry server"
 }
+
+variable "port" {
+  type        = number
+  description = "The port number of the container"
+}
