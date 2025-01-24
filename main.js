@@ -20,6 +20,8 @@ const contactRateLimiter = rateLimit({
 });
 
 const app = express();
+app.set('trust proxy', 1);
+
 const uri = env.URI;
 const port = env.PORT || 4888;
 const apiKey = env.API_KEY;
