@@ -52,6 +52,11 @@ app.use(cors({
 app.use((req, res, next) => {
     const allowedOrigins = [origin];
     const requestOrigin = req.headers.origin;
+    
+    if (!requestOrigin) {
+        return res.status(403).json({ message: "Origin not allowed"});
+    }
+
     if (requestOrigin && !allowedOrigins.includes(requestOrigin)) { 
         return res.status(403).json({ message: "Origin not allowed"});
     }
