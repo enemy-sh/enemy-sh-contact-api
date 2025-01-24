@@ -24,8 +24,9 @@ resource "azurerm_container_app" "container_app" {
   }
 
   template {
-    max_replicas = var.max_replicas
-    min_replicas = var.min_replicas
+    max_replicas    = var.max_replicas
+    min_replicas    = var.min_replicas
+    revision_suffix = locals.revision_suffix
 
     container {
       env {
