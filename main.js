@@ -49,6 +49,15 @@ app.use(cors({
     credentials: true
 }))
 
+app.use((req, res, next) => {
+    const allowedOrigins = [origin];
+    const requestOrigin = req.headers.origin;
+    if (requestOrigin && !allowedOrigins.includes(requestOrigin)) { 
+        return res.status(403).json({ message: "Origin not allowed"});
+    }
+    next();
+});
+
 app.use(express.json());
 app.post('/api/contact/', contactRateLimiter,verifyToken, async (req, res) => {
     const {
