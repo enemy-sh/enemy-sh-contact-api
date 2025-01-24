@@ -39,8 +39,6 @@ const verifyToken = (req, res, next) => {
         req.user = decoded
         next();
     } catch (err) {
-        console.log(err)
-        console.log(env.JWT_SECRET)
         return res.status(401).json({ message: "Invalid token"})
     }
 }
