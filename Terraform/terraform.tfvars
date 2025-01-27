@@ -16,3 +16,4 @@ memory          = "0.5Gi"
 registry_server = "ghcr.io"
 port            = 5000
 origin          = "https://enemy.sh"
+twenty_api_endpoint = "https://api.twenty.com"

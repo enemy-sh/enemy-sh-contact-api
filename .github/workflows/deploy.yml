@@ -20,3 +20,4 @@ jobs:
       client-secret: ${{ secrets.ESH_CLIENT_SECRET }}
       tenant-id: ${{ secrets.ESH_TENANT_ID }}
       auth-secret: ${{ secrets.ESH_AUTH_SECRET }}
+      twenty-api-key: ${{ secrets.TWENTY_API_KEY }}

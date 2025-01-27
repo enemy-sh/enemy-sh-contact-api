@@ -14,6 +14,11 @@ resource "azurerm_container_app" "container_app" {
     value = var.auth_secret
   }
 
+  secret {
+    name  = "twenty-api-key"
+    value = var.twenty_api_key
+  }
+
   ingress {
     traffic_weight {
       latest_revision = true
@@ -37,6 +42,16 @@ resource "azurerm_container_app" "container_app" {
       env {
         name  = "ORIGIN"
         value = var.origin
+      }
+
+      env {
+        name = "URI"
+        value = var.twenty_api_endpoint
+      }
+
+      env {
+        name = "API_KEY"
+        secret_name = "twenty-api-key"
       }
 
       env {

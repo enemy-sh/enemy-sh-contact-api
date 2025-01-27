@@ -81,3 +81,14 @@ variable "origin" {
   type        = string
   description = "The host name of the origin"
 }
+
+variable "twenty_api_endpoint" {
+  type        = string
+  description = "The API endpoint of the twenty api"
+}
+
+variable "twenty_api_key" {
+  type        = string
+  description = "The API key of the twenty api"
+  sensitive   = true
+}
