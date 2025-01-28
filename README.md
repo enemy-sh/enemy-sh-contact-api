@@ -9,7 +9,7 @@ This is a simple Express.js server that handles contact form submissions with ra
 - **Rate Limiting**: Limits submissions to 5 requests per hour per IP.
 - **JWT Authentication**: Ensures secure access to the API.
 - **CORS Support**: Configurable for allowed origins.
-- **Environment Configuration**: Uses `.env` for sensitive data.
+- **Environment Configuration**: Azure Container Apps Secrets
 
 ## Installation
 
@@ -25,7 +25,7 @@ This is a simple Express.js server that handles contact form submissions with ra
    ```bash
    npm install
    ```
-4. Create a `.env` file in the root directory with the following variables:
+4. Set the following environment variables
    ```env
    URI=<external-api-uri>
    PORT=<server-port>
@@ -40,7 +40,7 @@ This is a simple Express.js server that handles contact form submissions with ra
    ```bash
    npm start
    ```
-2. The server listens on the port specified in the `.env` file or defaults to `4888`.
+2. The server listens on the port specified in `PORT` or defaults to `4888`.
 
 ## Endpoints
 
